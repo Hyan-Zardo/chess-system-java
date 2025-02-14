@@ -3,24 +3,24 @@ package boardgame;
 public class Board {
 
     private int rows;
-    private int collumns;
+    private int columns;
     private Piece[][] pieces;
 
-    public Board(int rows, int collumns) {
-        if (rows < 1 || collumns < 1){
+    public Board(int rows, int columns) {
+        if (rows < 1 || columns < 1){
             throw new BoardException("Error creating board: there must be at least 1 row and 1 collum");
         }
         this.rows = rows;
-        this.collumns = collumns;
-        pieces = new Piece[rows][collumns];
+        this.columns = columns;
+        pieces = new Piece[rows][columns];
     }
 
     public int getRows() {
         return rows;
     }
 
-    public int getCollumns() {
-        return collumns;
+    public int getColumns() {
+        return columns;
     }
 
     public Piece piece(int row, int collum){
@@ -34,23 +34,23 @@ public class Board {
         if (!positionExists(position)){
             throw new BoardException("Position not on the board");
         }
-        return pieces[position.getRow()][position.getCollum()];
+        return pieces[position.getRow()][position.getColumn()];
     }
 
     public void placePiece(Piece piece, Position position) {
         if (thereIsAPiece(position)){
             throw new BoardException("There is already a piece on position " + position);
         }
-        pieces[position.getRow()][position.getCollum()] = piece;
+        pieces[position.getRow()][position.getColumn()] = piece;
         piece.position = position;
     }
 
     private boolean positionExists(int row, int collum){
-        return row >= 0 && row < rows && collum >= 0 && collum < collumns;
+        return row >= 0 && row < rows && collum >= 0 && collum < columns;
     }
 
     public boolean positionExists(Position position){
-        return positionExists(position.getRow(), position.getCollum());
+        return positionExists(position.getRow(), position.getColumn());
     }
 
     public boolean thereIsAPiece(Position position){
